@@ -1,3 +1,5 @@
+import time
+import random
 from instagrapi import Client
 import os
 
@@ -26,7 +28,7 @@ def upload_images(client):
         except Exception as e:
             print(f"Failed to upload image '{image_file}':", e)
 
-def upload_videos(client):
+def clip_upload(client):
     videos_folder = "./videos"
     if not os.path.exists(videos_folder):
         print("Videos folder not found.")
@@ -38,13 +40,19 @@ def upload_videos(client):
             video_path = os.path.join(videos_folder, video_file)
             client.video_upload(video_path, caption=" Tags 🏷: #animeaesthetic #animeedit #animevibes #oldanime #animesadquotes #explore #love #sadquote #lovequote #explorepage #quote #animelover #animeforlife #quotesandsaying #naruto #gardenofwords #lifequotes #lifegoals #motivationalquotes #lovequotes #quotesaboutlife #lovelifequotes #lifesayings #animelife #animelovequotes #animesliceoflife #animelove #animemotivation #animeindia #anime ")
             print(f"Uploaded video: {video_file}")
+            
+            # Add a random delay between 30 and 40 seconds
+            delay = random.randint(30, 40)
+            print(f"Waiting for {delay} seconds before uploading the next video...")
+            time.sleep(delay)
+            
         except Exception as e:
             print(f"Failed to upload video '{video_file}':", e)
 
 def main():
     # Replace these with your Instagram credentials
     username = "username"
-    password = "password"
+    password = "pass"
     
     # Log in
     client = login(username, password)
@@ -61,7 +69,7 @@ def main():
         if choice == "1":
             upload_images(client)
         elif choice == "2":
-            upload_videos(client)
+            clip_upload(client)
         elif choice == "3":
             break
         else:
